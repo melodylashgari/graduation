@@ -1,24 +1,24 @@
 const products = [
     {
         id: 1,
-        name: "iPhone 12 Pro",
-        description: "6.1-inch display",
-        price: 999,
-        image: ""
+        name: "Cinnamon Bun",
+        description: "A warming blend of cinnamon, creamy vanilla, nutmeg & sugar",
+        price: 99,
+        image: "https://res.cloudinary.com/dyixaigdb/image/upload/v1673611654/Studio%20Anahita/cinnamonbun_bxnfyl.jpg"
     },
     {
         id: 2,
-        name: "iPhone 12",
-        description: "5.4-inch display",
-        price: 699,
-        image: ""
+        name: "Lavender Haze",
+        description: "A dreamy pure essential oil blend of clary sage, lavender and rose geranium.",
+        price: 129,
+        image: "https://res.cloudinary.com/dyixaigdb/image/upload/v1673611654/Studio%20Anahita/lavenderhaze_nx6d3l.jpg"
     },
     {
         id: 3,
-        name: "iPhone 13 Pro Max",
-        description: "6.2-inch display",
-        price: 1399,
-        image: ""
+        name: "Hi Pumpkin",
+        description: "Rich, creamy pumpkin spiced with cinnamon, nutmeg, clove & ginger",
+        price: 79,
+        image: "https://res.cloudinary.com/dyixaigdb/image/upload/v1673611654/Studio%20Anahita/hipumpkin_frpp4m.jpg"
     }
 ];
 
