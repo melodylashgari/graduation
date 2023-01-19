@@ -10,7 +10,7 @@
 /* --- Navbar --- */
 .nav-bar{
   height: 70px;
-  background-color: bisque;
+  background-color: rgb(222, 194, 194);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,11 +37,15 @@
   justify-content: center;
   height: 25px;
   width: 25px;
-  background: pink;
+  background: white;
   border-radius: 50%;
   font-size: 14px;
   font-weight: 700;
   margin-left: 5px;
+}
+
+.bag-quantity span{
+  color: rgb(222, 194, 194);
 }
 
 /* --- /Navbar --- */
@@ -86,16 +90,16 @@
 }
 
 .product{
-  width: 250px;
+  width: 300px;
   max-width: 100%;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 15px;
-  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5), 2px 2px 5px rgba(94, 104, 121, 0.3);
+  box-shadow: 0px 0px 15px 4px rgba(168, 168, 168, 0.5);
 }
 
 .product img{
@@ -103,6 +107,7 @@
   margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 15px;
 }
 
 .product h3{
@@ -114,6 +119,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
 }
 
 .product .details .price{
@@ -122,17 +128,18 @@
 }
 
 .product button{
-  width: 100%;
-  height: 50px;
-  border-radius: 5px;
-  margin-top: 2rem;
+  border-radius: 15px;
+  margin-top: 10px;
   font-weight: 400;
   border: none;
-  outline: none;
   cursor: pointer;
-  background: gray;
+  background: rgb(222, 194, 194);
   color: white;
   letter-spacing: 1.15px;
+  height: 30px;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* --- /Home page --- */
