@@ -6,7 +6,7 @@ import { useGetAllProductsQuery } from "../features/productsApi";
 const Home = () => {
   const { data, error, isLoading } = useGetAllProductsQuery();
   const dispatch = useDispatch();
-  
+
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
   }
