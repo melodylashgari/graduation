@@ -279,6 +279,12 @@
   height: 40px;
   width: 100%;
 }
+
+.cart-checkout .cart-login{
+  background-color: rgb(255, 255, 133);
+  color: black;
+}
+
 .continue-shopping, .start-shopping{
   margin-top: 1rem;
 }
