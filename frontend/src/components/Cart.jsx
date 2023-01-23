@@ -9,6 +9,7 @@ import {
   clearCart,
   getTotals,
 } from "../slices/cartSlice";
+import PayButton from "./PayButton";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -78,7 +79,7 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-                <div className="cart-product-price">${cartItem.price}</div>
+                <div className="cart-product-price">{cartItem.price} SEK</div>
                 <div className="cart-product-quantity">
                   <button onClick={() => handleDecreaseCart(cartItem)}>
                     -
@@ -89,7 +90,7 @@ const Cart = () => {
                   </button>
                 </div>
                 <div className="cart-product-total-price">
-                  ${cartItem.price * cartItem.cartQuantity}
+                  {cartItem.price * cartItem.cartQuantity} SEK
                 </div>
               </div>
             ))}
@@ -101,11 +102,11 @@ const Cart = () => {
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
-                <span className="amount">${cart.cartTotalAmount}</span>
+                <span className="amount">{cart.cartTotalAmount} SEK</span>
               </div>
               <p>Taxes and shipping will be calculated at checkout</p>
               {auth._id ? (
-                <button>Check out</button>
+                <PayButton cartItems = {cart.cartItems}/>
               ) : (
                 <button className="cart-login" onClick={()=>navigate("/login")}>Login to check out</button>
               )}
