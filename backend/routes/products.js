@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
         const savedProduct = await product.save();
 
-        req.statusCode(200).send(savedProduct);
+        res.status(200).send(savedProduct);
       }
     }
   } catch (error) {

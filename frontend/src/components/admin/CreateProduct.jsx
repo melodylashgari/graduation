@@ -1,15 +1,27 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { productsCreate } from "../../slices/productsSlice";
+import { PrimaryButton } from "./CommonStyled";
 
 const CreateProduct = () => {
+  const dispatch = useDispatch();
   const [productImg, setProductImg] = useState("");
-  console.log(productImg)
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+
+  console.log(productImg);
+
   const handleProductImageUpload = (e) => {
     const file = e.target.files[0];
+
     TransformFile(file);
   };
+
   const TransformFile = (file) => {
     const reader = new FileReader();
+
     if (file) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
@@ -20,19 +32,56 @@ const CreateProduct = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      productsCreate({
+        name,
+        price,
+        description,
+        image: productImg,
+      })
+    );
+  };
+
   return (
     <StyledCreateProduct>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <h3>Create a new Product</h3>
         <input
           type="file"
           accept="image/"
           onChange={handleProductImageUpload}
+          required
         />
+        <input
+          type="text"
+          required
+          placeholder="Product Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          required
+          placeholder="Price"
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <input
+          type="text"
+          required
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </StyledForm>
       <ImagePreview>
-        {productImg? <>
-        <img src={productImg} alt="product-image"/></> : <p>Image preview will appear here!</p>}
+        {productImg ? (
+          <>
+            <img src={productImg} alt="product-image" />
+          </>
+        ) : (
+          <p>Image preview will appear here!</p>
+        )}
       </ImagePreview>
     </StyledCreateProduct>
   );
