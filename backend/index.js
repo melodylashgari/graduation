@@ -5,6 +5,7 @@ const register = require("./routes/register")
 const login = require("./routes/login")
 const stripe = require("./routes/stripe")
 const productsRoute = require("./routes/products")
+const bodyParser = require('body-parser');
 
 const products = require("./products");
 
@@ -14,6 +15,9 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
+
+app.use(bodyParser.json({limit: '10mb'}))
+app.use(bodyParser.urlencoded({extended: true, limit: '10mb'}))
 
 app.use("/api/register", register)
 app.use("/api/login", login)
@@ -30,10 +34,6 @@ app.get("/products", (req, res) => {
 
 const port = process.env.PORT || 5000;
 const uri = process.env.DB_URI;
-
-const bodyParser = require('body-parser');
-app.use(bodyParser.json({limit: '300kb'}))
-app.use(bodyParser.urlencoded({extended: true, limit: '10mb'}))
 
 app.listen(port, console.log(`Server running on port ${port}`));
 

@@ -28,7 +28,7 @@ const Home = () => {
                   <div className="details">
                     <span>{product.description}</span>
                   </div>
-                    <span className="price">${product.price}</span>
+                    <span className="price">{product.price} SEK</span>
                   <button onClick={() => handleAddToCart(product)}>
                     Add To Cart
                   </button>
