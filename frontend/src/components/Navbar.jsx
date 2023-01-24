@@ -32,9 +32,9 @@ const Navbar = () => {
       </Link>
       {auth._id ? (
         <Links>
-          <div>
+        {auth.isAdmin ? <div>
             <Link to="/admin/summary">Admin</Link>
-          </div>
+          </div> : null}
           <div
             onClick={() => {
               dispatch(logoutUser(null));
