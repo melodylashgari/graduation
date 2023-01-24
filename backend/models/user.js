@@ -20,8 +20,14 @@ const userSchema = new mongoose.Schema({
     minlength: 3,
     maxlength: 1024,
   },
-});
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+},
+{timestamps: true}
+);
 
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model("User", userSchema);
 
 exports.User = User;
