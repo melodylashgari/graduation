@@ -126,7 +126,6 @@ const ImagePreview = styled.div`
   justify-content: center;
   padding: 2rem;
   color: rgb(78, 78, 78);
-
   img {
     max-width: 100%;
   }

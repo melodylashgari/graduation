@@ -26,11 +26,7 @@ function App() {
         <Routes>
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/cart" exact element={<Cart />}></Route>
-          <Route
-            path="/checkout-success"
-            exact
-            element={<CheckoutSuccess />}
-          ></Route>
+          <Route path="/checkout-success" exact element={<CheckoutSuccess />}></Route>
           <Route path="/register" exact element={<Register />}></Route>
           <Route path="/login" exact element={<Login />}></Route>
           <Route path="/admin" exact element={<Dashboard />}>

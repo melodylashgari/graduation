@@ -109,7 +109,7 @@ const Cart = () => {
                 <PayButton cartItems = {cart.cartItems}/>
               ) : (
                 <button className="cart-login" onClick={()=>navigate("/login")}>Login to check out</button>
-              )}
+             )}
               <div className="continue-shopping">
                 <Link to="/">
                   <svg
