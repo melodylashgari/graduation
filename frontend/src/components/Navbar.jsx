@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { logoutUser } from "../slices/authSlice";
 
 const Navbar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
   return (
@@ -30,17 +30,26 @@ const Navbar = () => {
           </span>
         </div>
       </Link>
-      {
-        auth._id ? <Logout onClick={()=>{
-          dispatch(logoutUser(null))
-          toast.warning("Logged out!", { position: "bottom-left"})
-        }}>
-          <Link to="/">Logout</Link>
-        </Logout> : <AuthLinks>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+      {auth._id ? (
+        <Links>
+            <div>
+              <Link to="/admin/summary">Admin</Link>
+            </div>
+          <div
+            onClick={() => {
+              dispatch(logoutUser(null));
+              toast.warning("Logged out!", { position: "bottom-left" });
+            }}
+          >
+            <Link to="/">Logout</Link>
+          </div>
+        </Links>
+      ) : (
+        <AuthLinks>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </AuthLinks>
-      }
+      )}
     </nav>
   );
 };
@@ -48,15 +57,22 @@ const Navbar = () => {
 export default Navbar;
 
 const AuthLinks = styled.div`
-  a{
-    &:last-child{
+  a {
+    &:last-child {
       margin-left: 2rem;
       color: white;
     }
   }
-`
+`;
 
-const Logout = styled.div`
-color: white
-cursor: pointer;
-`
+const Links = styled.div`
+  color: white;
+  display: flex;
+  div {
+    cursor: pointer;
+
+    &:last-child {
+      margin-left: 2rem;
+    }
+  }
+`;

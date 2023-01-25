@@ -1,4 +1,10 @@
-import { useState } from "react";
+const CreateProduct = () => {
+  return ( <h2>Create Product</h2> );
+}
+ 
+export default CreateProduct;
+
+/* import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { productsCreate } from "../../slices/productsSlice";
@@ -129,4 +135,4 @@ const ImagePreview = styled.div`
   img {
     max-width: 100%;
   }
-`;
+`; */
