@@ -1,10 +1,4 @@
-const CreateProduct = () => {
-  return ( <h2>Create Product</h2> );
-}
- 
-export default CreateProduct;
-
-/* import { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { productsCreate } from "../../slices/productsSlice";
@@ -132,7 +126,8 @@ const ImagePreview = styled.div`
   justify-content: center;
   padding: 2rem;
   color: rgb(78, 78, 78);
+
   img {
     max-width: 100%;
   }
-`; */
+`;

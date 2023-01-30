@@ -32,9 +32,9 @@ const Navbar = () => {
       </Link>
       {auth._id ? (
         <Links>
-            <div>
-              <Link to="/admin/summary">Admin</Link>
-            </div>
+        {auth.isAdmin ? <div>
+            <Link to="/admin/summary">Admin</Link>
+          </div> : null}
           <div
             onClick={() => {
               dispatch(logoutUser(null));
@@ -66,13 +66,14 @@ const AuthLinks = styled.div`
 `;
 
 const Links = styled.div`
-  color: white;
-  display: flex;
-  div {
-    cursor: pointer;
+color: white;
+display: flex;
 
-    &:last-child {
-      margin-left: 2rem;
-    }
+div{
+  cursor: pointer;
+
+  &:last-child{
+    margin-left: 2rem;
   }
+}
 `;

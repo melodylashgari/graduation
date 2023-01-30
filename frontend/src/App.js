@@ -1,20 +1,21 @@
 import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Navbar from "./components/Navbar";
-import Cart from "./components/Cart";
 import Home from "./components/Home";
+import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import CheckoutSuccess from "./components/CheckoutSuccess";
+import Cart from "./components/Cart";
 import Dashboard from "./components/admin/Dashboard";
 import Products from "./components/admin/Products";
 import Summary from "./components/admin/Summary";
 import CreateProduct from "./components/admin/CreateProduct";
+
+
+import "react-toastify/dist/ReactToastify.css";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import CheckoutSuccess from "./components/CheckoutSuccess";
 
 function App() {
   return (
@@ -34,11 +35,7 @@ function App() {
           <Route path="/login" exact element={<Login />}></Route>
           <Route path="/admin" exact element={<Dashboard />}>
             <Route path="products" exact element={<Products />}>
-              <Route
-                path="create-product"
-                exact
-                element={<CreateProduct />}
-              ></Route>
+            <Route path="create-product" exact element={<CreateProduct />}></Route>
             </Route>
             <Route path="summary" exact element={<Summary />}></Route>
           </Route>
@@ -50,5 +47,3 @@ function App() {
 }
 
 export default App;
-
-

@@ -1,8 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Admin = () => {
+  const auth = useSelector((state) => state.auth);
+
+  if (!auth.isAdmin) return <p>Access denied</p>;
   return (
     <StyledDashboard>
       <SideNav>
@@ -31,16 +34,7 @@ const Admin = () => {
   );
 };
 
- 
 export default Admin;
-
-/* 
-
-const Admin = () => {
-  const auth = useSelector((state) => state.auth);
-
-  if (!auth.isAdmin) return <p>Access denied</p>;
-  */
 
 const StyledDashboard = styled.div`
   display: flex;
@@ -56,6 +50,7 @@ const SideNav = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+
   h3 {
     margin: 0 0 1rem 0;
     padding: 0;

@@ -14,13 +14,14 @@ router.post("/create-checkout-session", async (req, res) => {
       userId: req.body.userId,
     },
   });
+
   const line_items = req.body.cartItems.map((item) => {
     return {
       price_data: {
         currency: "SEK",
         product_data: {
           name: item.name,
-          images: [item.image],
+          images: [item.image.url],
           description: item.description,
           metadata: {
             id: item.id,
@@ -83,9 +84,9 @@ router.post("/create-checkout-session", async (req, res) => {
     phone_number_collection: {
       enabled: true,
     },
+    customer: customer.id,
     line_items,
     mode: "payment",
-    customer: customer.id,
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
     cancel_url: `${process.env.CLIENT_URL}/cart`,
   });
@@ -93,16 +94,8 @@ router.post("/create-checkout-session", async (req, res) => {
   res.send({ url: session.url });
 });
 
-// Create order in DB
+// Create Order
 const createOrder = async (customer, data, lineItems) => {
-/*   console.log(customer.metadata.cart)
-  const products = Items.map((item) => {
-    return {
-      productId: item.id,
-      quantity: item.cartQuantity,
-    };
-  }); */
-
   const newOrder = new Order({
     userId: customer.metadata.userId,
     customerId: data.customer,
@@ -111,52 +104,41 @@ const createOrder = async (customer, data, lineItems) => {
     subtotal: data.amount_subtotal,
     total: data.amount_total,
     shipping: data.customer_details,
-    payment_status: data.payment_status
+    payment_status: data.payment_status,
   });
-
   try{
     const savedOrder = await newOrder.save()
-
-    console.log("Processed Order:", savedOrder)
+    console.log("Processed Order:", savedOrder);
+    //email
   }catch(err){
     console.log(err)
   }
-}
+};
 
-
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-// let endpointSecret;
+let endpointSecret;
 
 // endpointSecret = "whsec_f4c55332bc1216488a5c67f15f4bbd2bcd1b132f8b64747461ded2340bb7ed10";
 
 router.post(
   "/webhook",
-  express.json({ type: "application/json" }),
-  async (req, res) => {
+  express.raw({ type: "application/json" }),
+  (req, res) => {
+    const sig = req.headers["stripe-signature"];
+
     let data;
     let eventType;
 
-    // Check if webhook signing is configured.
-    let webhookSecret;
-    //webhookSecret = process.env.STRIPE_WEB_HOOK;
-
-
-    if (webhookSecret) {
-      // Retrieve the event by verifying the signature using the raw body and secret.
+    if (endpointSecret) {
       let event;
-      let signature = req.headers["stripe-signature"];
 
       try {
-        event = stripe.webhooks.constructEvent(
-          req.body,
-          signature,
-          webhookSecret
-        );
+        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+        console.log("Webhook verified.");
       } catch (err) {
-        console.log(`Webhook signature verification failed: ${err}`);
-        return res.sendStatus(400);
+        console.log(`Webhook Error: ${err.message}`);
+        res.status(400).send(`Webhook Error: ${err.message}`);
+        return;
       }
-      // Extract the object from the event.
       data = event.data.object;
       eventType = event.type;
     } else {
@@ -164,20 +146,19 @@ router.post(
       eventType = req.body.type;
     }
 
-    // Handle the checkout.session.completed event
+    // Handle the event
     if (eventType === "checkout.session.completed") {
       stripe.customers
         .retrieve(data.customer)
-        .then(async(customer) => {
+        .then((customer) => {
           stripe.checkout.sessions.listLineItems(
             data.id,
-            {},
-            function(err,lineItems){
-              console.log("line_items", lineItems)
-              createOrder(customer, data, lineItems)
-            }
-          )
-          })
+            { },
+            function(err, lineItems) {
+              console.log("Line_items", lineItems)
+              createOrder(customer, data, lineItems);
+            })
+        })
         .catch((err) => console.log(err.message));
     }
 

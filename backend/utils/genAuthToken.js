@@ -8,6 +8,7 @@ const genAuthToken = (user) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
     },
     secretKey
   );
@@ -15,4 +16,4 @@ const genAuthToken = (user) => {
   return token;
 };
 
-module.exports = genAuthToken
+module.exports = genAuthToken;
