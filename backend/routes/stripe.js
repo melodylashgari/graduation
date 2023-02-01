@@ -155,7 +155,7 @@ router.post(
             data.id,
             { },
             function(err, lineItems) {
-              console.log("Line_items", lineItems)
+              console.log("line_items", lineItems)
               createOrder(customer, data, lineItems);
             })
         })
