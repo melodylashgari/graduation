@@ -4,6 +4,7 @@ import {FaUsers, FaChartBar, FaClipboard} from "react-icons/fa"
 import Widget from "./summary-components/Widget";
 import axios from "axios";
 import { setHeaders, url } from "../../slices/api";
+import Chart from "./summary-components/Chart";
 
 const Summary = () => {
 
@@ -13,9 +14,6 @@ const Summary = () => {
     const [ordersPerc, setOrdersPerc] = useState(0)
     const [income, setIncome] = useState([])
     const [incomePerc, setIncomePerc] = useState(0)
-
-console.log("income", income)
-console.log("incomeP", incomePerc)
 
     function compare(a, b){
         if(a._id < b._id){
@@ -92,7 +90,7 @@ console.log("incomeP", incomePerc)
         },
         {
             icon: <FaChartBar/>,
-            digits: income[0]?.total,
+            digits: income[0]?.total ? income[0]?.total /100 : "",
             isMoney: true,
             title: "Earnings",
             color: "rgb(253, 181, 40)",
@@ -111,6 +109,7 @@ console.log("incomeP", incomePerc)
                 {data?.map((data, index) => <Widget key={index} data={data}/>)}
             </WidgetWrapper>
         </Overview>
+        <Chart></Chart>
     </MainStats>
     <SideStats></SideStats>
   </StyledSummary>;

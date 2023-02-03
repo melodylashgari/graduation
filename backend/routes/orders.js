@@ -4,6 +4,22 @@ const moment = require("moment");
 
 const router = require("express").Router();
 
+// GET ORDERS
+
+router.get("/", isAdmin, async (req, res) => {
+  const query = req.query.new;
+  try {
+    const orders = query
+      ? await Order.find().sort({ _id: -1 }).limit(4)
+      : await Order.find().sort({ _id: -1 });
+
+      res.status(200).send(orders)
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
+
 // GET ORDER STATS
 
 router.get("/stats", isAdmin, async (req, res) => {
@@ -71,34 +87,34 @@ router.get("/income/stats", isAdmin, async (req, res) => {
 
 // GET 1 WEEK SALES
 
-router.get("/week-sales", async (req, res) => {
-    const last7Days = moment()
-      .day(moment().day() - 7)
-      .format("YYYY-MM-DD HH:mm:ss");
-  
-    try {
-      const income = await Order.aggregate([
-        {
-          $match: { createdAt: { $gte: new Date(last7Days) } },
+router.get("/week-sales", isAdmin, async (req, res) => {
+  const last7Days = moment()
+    .day(moment().day() - 7)
+    .format("YYYY-MM-DD HH:mm:ss");
+
+  try {
+    const income = await Order.aggregate([
+      {
+        $match: { createdAt: { $gte: new Date(last7Days) } },
+      },
+      {
+        $project: {
+          day: { $dayOfWeek: "$createdAt" },
+          sales: "$total",
         },
-        {
-          $project: {
-            day: { $dayOfWeek: "$createdAt" },
-            sales: "$total",
-          },
+      },
+      {
+        $group: {
+          _id: "$day",
+          total: { $sum: "$sales" },
         },
-        {
-          $group: {
-            _id: "$day",
-            total: { $sum: "$sales" },
-          },
-        },
-      ]);
-      res.status(200).send(income);
-    } catch (err) {
-      console.log(err);
-      res.status(500).send(err);
-    }
-  });
+      },
+    ]);
+    res.status(200).send(income);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+});
 
 module.exports = router;
