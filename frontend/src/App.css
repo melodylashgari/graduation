@@ -9,6 +9,8 @@
 
 /* --- Navbar --- */
 .nav-bar {
+  position: sticky;
+  top: 0;
   height: 70px;
   background-color: rgb(222, 194, 194);
   display: flex;
@@ -315,6 +317,9 @@
 
 .link-active {
   color: rgb(222, 194, 194);
+  border-left: 3px solid rgb(222, 194, 194);
+  padding-left: 5px;
+  border-radius: 2px;
 }
 .link-inactive {
   color: rgb(97, 97, 97);

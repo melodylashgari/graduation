@@ -16,6 +16,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import CheckoutSuccess from "./components/CheckoutSuccess";
+import ProductsList from "./components/admin/list/ProductsList";
+import Users from "./components/admin/Users";
+import Orders from "./components/admin/Orders";
 
 function App() {
   return (
@@ -35,9 +38,12 @@ function App() {
           <Route path="/login" exact element={<Login />}></Route>
           <Route path="/admin" exact element={<Dashboard />}>
             <Route path="products" exact element={<Products />}>
+              <Route index element={<ProductsList/>}/>
             <Route path="create-product" exact element={<CreateProduct />}></Route>
             </Route>
-            <Route path="summary" exact element={<Summary />}></Route>
+            <Route path="summary" exact element={<Summary />}/>
+            <Route path="users" exact element={<Users />}/>
+            <Route path="orders" exact element={<Orders />}/>
           </Route>
           <Route path="/" exact element={<Home />}></Route>
         </Routes>
