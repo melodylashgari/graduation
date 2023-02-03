@@ -5,6 +5,7 @@ import Widget from "./summary-components/Widget";
 import axios from "axios";
 import { setHeaders, url } from "../../slices/api";
 import Chart from "./summary-components/Chart";
+import Transactions from "./summary-components/Transactions";
 
 const Summary = () => {
 
@@ -109,9 +110,11 @@ const Summary = () => {
                 {data?.map((data, index) => <Widget key={index} data={data}/>)}
             </WidgetWrapper>
         </Overview>
-        <Chart></Chart>
+        <Chart/>
     </MainStats>
-    <SideStats></SideStats>
+    <SideStats>
+        <Transactions/>
+    </SideStats>
   </StyledSummary>;
 };
 

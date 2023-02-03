@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { setHeaders, url } from "../../../slices/api";
 import {
   LineChart,
   Line,
@@ -11,8 +12,6 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { FaTruckLoading } from "react-icons/fa";
-import { setHeaders, url } from "../../../slices/api";
 
 const Chart = () => {
   const [sales, setSales] = useState([]);
