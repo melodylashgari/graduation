@@ -9,8 +9,8 @@ const Summary = () => {
 
     const [users, setUsers] = useState([])
     const [usersPerc, setUsersPerc] = useState(0)
-
-    console.log(usersPerc);
+    const [orders, setOrders] = useState([])
+    const [ordersPerc, setOrdersPerc] = useState(0)
 
     function compare(a, b){
         if(a._id < b._id){
@@ -37,6 +37,21 @@ const Summary = () => {
         fetchData()
     }, [])
 
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const res = await axios.get(`${url}/orders/stats`, setHeaders())
+                
+                res.data.sort(compare)
+                setOrders(res.data);
+                setOrdersPerc(((res.data[0].total - res.data[1].total) / res.data[1].total) * 100)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchData()
+    }, [])
+
     const data = [
         {
             icon: <FaUsers/>,
@@ -49,12 +64,12 @@ const Summary = () => {
         },
         {
             icon: <FaClipboard/>,
-            digits: 70,
+            digits: orders[0]?.total,
             isMoney: false,
             title: "Orders",
             color: "rgb(38, 198, 249)",
             bgColor: "rgba(38, 198, 249, 0.12)",
-            percentage: 20
+            percentage: ordersPerc,
         },
         {
             icon: <FaChartBar/>,
