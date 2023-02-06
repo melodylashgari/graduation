@@ -19,6 +19,9 @@ import CheckoutSuccess from "./components/CheckoutSuccess";
 import ProductsList from "./components/admin/list/ProductsList";
 import Users from "./components/admin/Users";
 import Orders from "./components/admin/Orders";
+import Product from "./components/Details/Product";
+import Order from "./components/Details/Order";
+import UserProfile from "./components/Details/UserProfile";
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
           ></Route>
           <Route path="/register" exact element={<Register />}></Route>
           <Route path="/login" exact element={<Login />}></Route>
+          <Route path="/product/:id" exact element={<Product />}></Route>
+          <Route path="/order/:id" exact element={<Order />}></Route>
+          <Route path="/user/:id" exact element={<UserProfile />}></Route>
           <Route path="/admin" exact element={<Dashboard />}>
             <Route path="products" exact element={<Products />}>
               <Route index element={<ProductsList/>}/>

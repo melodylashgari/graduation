@@ -1,14 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../slices/cartSlice";
-// import { useGetAllProductsQuery } from "../slices/productsApi";
 
 const Home = () => {
   const {items: data, status } = useSelector((state) => state.products);
   
   const dispatch = useDispatch();
-
-// const { data, error, isLoading } = useGetAllProductsQuery();
- // console.log("Api", isLoading)
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))

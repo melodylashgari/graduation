@@ -7,43 +7,82 @@ const initialState = {
   items: [],
   status: null,
   createStatus: null,
+  editStatus: null,
+  deleteStatus: null,
 };
 
+// GET
 export const productsFetch = createAsyncThunk(
   "products/productsFetch",
   async () => {
-    try{
+    try {
       const response = await axios.get(`${url}/products`);
       return response.data;
-    } catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   }
 );
+
+// CREATE
 export const productsCreate = createAsyncThunk(
   "products/productsCreate",
   async (values) => {
-    try{
+    try {
       const response = await axios.post(
-        `${url}/products`, 
+        `${url}/products`,
         values,
         setHeaders()
-        );
+      );
       return response.data;
-    } catch(error){
-      console.log(error)
-      toast.error(error.response?.data)
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data);
     }
   }
 );
 
+// EDIT
+export const productsEdit = createAsyncThunk(
+  "products/productsEdit",
+  async (values) => {
+    try {
+      const response = await axios.put(
+        `${url}/products/${values.product._id}`,
+        values,
+        setHeaders()
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data);
+    }
+  }
+);
 
+// DELETE
+export const productsDelete = createAsyncThunk(
+  "products/productsDelete",
+  async (id) => {
+    try {
+      const response = await axios.delete(
+        `${url}/products/${id}`,
+        setHeaders()
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data);
+    }
+  }
+);
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
   extraReducers: {
+    // GET
     [productsFetch.pending]: (state, action) => {
       // immer
       state.status = "pending";
@@ -55,6 +94,7 @@ const productsSlice = createSlice({
     [productsFetch.rejected]: (state, action) => {
       state.status = "rejected";
     },
+    // CREATE PRODUCT
     [productsCreate.pending]: (state, action) => {
       state.createStatus = "pending";
     },
@@ -65,6 +105,36 @@ const productsSlice = createSlice({
     },
     [productsCreate.rejected]: (state, action) => {
       state.createStatus = "rejected";
+    },
+    // EDIT PRODUCT
+    [productsEdit.pending]: (state, action) => {
+      state.editStatus = "pending";
+    },
+    [productsEdit.fulfilled]: (state, action) => {
+      const updatedProducts = state.items.map((product) =>
+        product._id === action.payload._id ? action.payload : product
+      );
+      state.items = updatedProducts;
+      state.editStatus = "success";
+      toast.info("Product Edited!");
+    },
+    [productsEdit.rejected]: (state, action) => {
+      state.editStatus = "rejected";
+    },
+    // DELETE PRODUCT
+    [productsDelete.pending]: (state, action) => {
+      state.deleteStatus = "pending";
+    },
+    [productsDelete.fulfilled]: (state, action) => {
+      const newList = state.items.filter(
+        (item) => item._id != action.payload._id
+      );
+      state.items = newList;
+      state.deleteStatus = "success";
+      toast.error("Product Deleted!");
+    },
+    [productsDelete.rejected]: (state, action) => {
+      state.deleteStatus = "rejected";
     },
   },
 });
