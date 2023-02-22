@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../slices/cartSlice";
+import styled from "styled-components";
 
 const Home = () => {
   const {items: data, status } = useSelector((state) => state.products);
@@ -14,6 +15,9 @@ const Home = () => {
     <div className="home-container">
       {status === "success" ? (
         <>
+        <Hero>
+          <img src="/assets/hero.jpeg" alt="" />
+        </Hero>
           <h2>New Arrivals</h2>
           <div className="products">
             {data &&
@@ -41,3 +45,7 @@ const Home = () => {
   );
 };
 export default Home;
+
+const Hero = styled.div`
+height: 650px;
+`

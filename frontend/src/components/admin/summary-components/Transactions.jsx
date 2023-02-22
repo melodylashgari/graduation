@@ -45,8 +45,8 @@ const Transactions = () => {
 export default Transactions;
 
 const StyledTransactions = styled.div`
-background: rgb(48, 51, 78);
-color: rgba(234, 234, 255, 0.87);
+background: rgb(229, 213, 213);
+color: black;
 padding: 1rem;
 border-radius: 5px;
 `;
@@ -57,11 +57,11 @@ font-size: 14px;
 margin-top: 1rem;
 padding: 0.5rem;
 border-radius: 3px;
-background: rgba(38, 198, 249, 0.12);
+background: rgba(216, 192, 192);
 p{
     flex: 1;
 }
 &:nth-child(even){
-    background: rgba(102, 108, 255, 0.12)
+    background: rgb(204, 165, 165);
 }
 `;

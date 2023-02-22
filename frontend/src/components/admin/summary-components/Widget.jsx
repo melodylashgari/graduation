@@ -53,7 +53,7 @@ const Text = styled.div`
   }
   p {
     font-size: 14px;
-    color: rgba(234, 234, 255, 0.68);
+    color: black;
   }
 `;
 
@@ -61,5 +61,9 @@ const Percentage = styled.div`
   margin-left: 0.5rem;
   font-size: 14px;
   color: ${({ isPositive }) =>
-    isPositive ? "rgb(114, 255, 40)" : "rgb(255, 77, 73)"};
+    isPositive ? "rgb(88, 159, 49)" : "rgb(159, 49, 49)"};
+  background-color: ${({ isPositive }) =>
+    isPositive ? "rgba(88, 159, 49, 0.2)" : "rgba(159, 49, 49, 0.2)"};
+  padding: 4px;
+  border-radius: 5px
 `;

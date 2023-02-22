@@ -6,7 +6,6 @@ import axios from "axios";
 import { setHeaders, url } from "../../slices/api";
 import Chart from "./summary-components/Chart";
 import Transactions from "./summary-components/Transactions";
-import AllTimeData from "./summary-components/AllTimeData";
 
 const Summary = () => {
 
@@ -115,7 +114,6 @@ const Summary = () => {
     </MainStats>
     <SideStats>
         <Transactions/>
-        <AllTimeData/>
     </SideStats>
   </StyledSummary>;
 };
@@ -135,13 +133,13 @@ const MainStats = styled.div`
 const Title = styled.div`
   p {
     font-size: 14px;
-    color: rgba(234, 234, 255, 0.68);
+    color: black;
   }
 `;
 
 const Overview = styled.div`
-  background: rgb(48, 51, 78);
-  color: rgba(234, 234, 255, 0.87);
+  background: rgb(229, 213, 213);
+  color: black;
   width: 100%;
   padding: 1.5rem;
   height: 170px;
