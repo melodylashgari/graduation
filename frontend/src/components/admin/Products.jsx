@@ -11,7 +11,7 @@ const Products = () => {
         <PrimaryButton
           onClick={() => navigate("/admin/products/create-product")}
         >
-          Create
+          Create new Product
         </PrimaryButton>
       </AdminHeaders>
       <Outlet />

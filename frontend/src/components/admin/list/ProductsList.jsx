@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import * as React from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { productsDelete } from "../../../slices/productsSlice";

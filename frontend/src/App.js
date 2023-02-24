@@ -10,6 +10,9 @@ import Dashboard from "./components/admin/Dashboard";
 import Products from "./components/admin/Products";
 import Summary from "./components/admin/Summary";
 import CreateProduct from "./components/admin/CreateProduct";
+import AboutUs from "./components/AboutUs";
+import Shipping from "./components/Shipping";
+import Contact from "./components/Contact";
 
 
 import "react-toastify/dist/ReactToastify.css";
@@ -39,6 +42,9 @@ function App() {
           ></Route>
           <Route path="/register" exact element={<Register />}></Route>
           <Route path="/login" exact element={<Login />}></Route>
+          <Route path="/about-us" exact element={<AboutUs />}></Route>
+          <Route path="/shipping" exact element={<Shipping />}></Route>
+          <Route path="/contact" exact element={<Contact />}></Route>
           <Route path="/product/:id" exact element={<Product />}></Route>
           <Route path="/order/:id" exact element={<Order />}></Route>
           <Route path="/user/:id" exact element={<UserProfile />}></Route>

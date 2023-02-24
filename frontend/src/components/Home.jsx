@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../slices/cartSlice";
 import styled from "styled-components";
+import background from "./assets/hero.jpeg";
 
 const Home = () => {
   const {items: data, status } = useSelector((state) => state.products);
@@ -16,8 +17,9 @@ const Home = () => {
       {status === "success" ? (
         <>
         <Hero>
-          <img src="/assets/hero.jpeg" alt="" />
+        <h1>Welcome to Studio Anahita</h1>
         </Hero>
+        <Products>
           <h2>New Arrivals</h2>
           <div className="products">
             {data &&
@@ -35,6 +37,7 @@ const Home = () => {
                 </div>
               ))}
           </div>
+          </Products>
         </>
       ) : status === "pending" ? (
         <p>Loading...</p>
@@ -47,5 +50,21 @@ const Home = () => {
 export default Home;
 
 const Hero = styled.div`
-height: 650px;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 80%;
+margin: auto;
+padding: 4em 0;
+text-align: center;
+border-bottom: 1px solid #b4b4b4;
+h1{
+  padding: 0 2em;
+  font-weight: 400;
+  font-size: 48px;
+}
+`
+
+const Products = styled.div`
+margin-top: 4em;
 `
